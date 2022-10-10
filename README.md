@@ -1,6 +1,6 @@
 # Movie-Data-Analysis
 
-Introduction:
+## Introduction:
 Nowadays, watching movie is a good way to kill time and entertain ourselves. In terms of audience, they want to know what kind of movie is great and popular. On the other hand, if some investors want to get into the movie business, but they have no prior experience in the field and will need assistance to make their movie studio a success. They may pay more attention to what factors is significant to the revenue or popularity. Therefore, this movie metadata is sufficient to make us figure out the haziness and doubt mentioned above. In addition, the data here is with enough size and type. In the csv file of movie metadata, we have records more than 45,000 records. Moreover, there are many kinds of data in this data set. There are categorical feature and continuous feature in the dataset. According to the reasons above, this dataset is perfect for us to engage in.
 The purpose of this report is to address the questions below.
 
@@ -14,8 +14,8 @@ In terms of the predictive models, we
 The exploratory data analysis will be carried out initially in order to reveal some interesting data and address the questions attached above. The dataset will then be used to create a Lasso Regression, a Gradient Boosting Regression, a Random Forest, and a Decision Tree Classification model to answer the four questions given.
 
  
-Exploratory Data Analysis:
-Data Extraction:	
+## Exploratory Data Analysis:
+### Data Extraction:	
 The dataset we chose to set out this capstone project is about 45,466 movies. There are 24 features in this database, including cast, crew, plot keywords, budget, revenue, posters, release dates, languages, production companies, countries, TMDB vote counts, vote averages and so on.
 
 Data Cleaning:
@@ -23,7 +23,7 @@ Data Cleaning:
 	Because the data of genres and production countries are stored as like a dictionary, which were scaped from the websites. Therefore, we need to extract the useful information from those variables. In order to make the later analysis feasible and meaningful, after extracting the data from genres and production countries, we create a new data frame with the genres stacked, due to that each movies have many genres.  
 	The first model of Lasso regression filters out the movies budget less than $1,000. In addition, in order to analyze the impact of release month, we create a new feature is_holiday to set Month Jan, April, May, Sep, Nov, and Dec as holiday month. In terms of the languages and the countries, we select 4 main value and set rest of them as other.
 
-Data Visualization:
+### Data Visualization:
 	Here is the Word cloud of overview of movie. We can clearly notice that the movies with topic life or find or love enjoys great numbers. 
  
 According to the density graph of average rating, there are many voting rate centered around 5-7. In terms of how long the movie is, most movies are 120mins.
@@ -37,12 +37,12 @@ According to the density graph of average rating, there are many voting rate cen
  
 	Here is a correlation matrix of those numeric data. According to the graph, we can notice that revenue and budget indeed have positive relationships. The popularity do not have that strong relationships between other features. In terms of the vote count, there are many possible relationships we can focus on and dive into.
  
-Question 1: 
+#### Question 1: 
 	We take these two features into consideration and make a regression model. In accordance with the results of the OLS regression, the R2 is 0.53, which is not bad. In addition, the coefficient of the budget is 3.02 with 0.000 p-value, which is highly confident and creditable. 
     
 	Therefore, we can conclude that the more budget you invest, the more revenue you gonna get. When the budget increase 1,000 dollars, the revenue will rise by 3,020 dollars. 
 
-Question 2: 
+#### Question 2: 
 In this problem we want to know the language in the film the other properties of the films on what is reflected, the data set we have a total of more than 80 kinds of film language, this analysis does not make sense and takes a long time, so we will film language into English and non-English, on this basis to explore difference between English movies and English movies.
 
 Then we look at some basic data of movies according to their language classification.
@@ -57,7 +57,7 @@ When we study the difference in the release time of the two kinds of films, we f
   
 Figure. The distribution of the release time of the two kinds of movies
 
-Question 3: 
+#### Question 3: 
 In question 3, we first want to know in which month of the year the most films will be released. We can know the most popular movie month and find why so many movie choose to be release in such a time. Here is the plot that show the number of movies released in each month:
 
 
@@ -74,14 +74,14 @@ We have the following findings based on previous results:
 3. There are no obvious difference of the ratings of the movies in each month.
 
  
-Predictive Models:
-Model 1:
+## Predictive Models:
+### Model 1:
 In order to figure out what features or variables have significant impact on the popularity, we need to make a regression model to predict the popularity of movies. There is no question that this model is considerable and beneficial to filmmakers.
 	First of all, we did a simple regression with 4 numerical variables budget, runtime, vote_average, and 4 categorical variables country, language, genres and is_holiday. However, the R2 is only 0.12, which indicates the regression results is really bad. Therefore, we try to use Lasso regression to avoid the overfitting. 
 	 After building the Lasso regression model, we got RMSE 9.27 but the R-square still very low (0.16), which indicates that this regression model is bad. The coefficients of the variables are shown in the plot below. In addition, the lines of MSE of Lasso are not converged. Therefore, popularity is hard to predict by these variables in our data.
  
  
-Model 2:
+### Model 2:
 To some extent, the rating of audience has a strong influence on the revenue or the popularity of a movie. Therefore, we plan to make a regression model to predict the rating of voting by observer
 For the evaluation of a film, the average score of the film is a very important factor. We try to predict the average score a movie is likely to receive using known variables, such as the movie market, the movie budget and profit, the release month and the movie genre.
 Different from ordinary movie rating levels, the score in the data set is a continuous variable between 0 and 10, so we will use regression model to predict movie scores in this problem.
@@ -100,22 +100,23 @@ Then we use the more complicated machine learning model to forecast the film sco
 We then tried the gradient model, the popular machine model, and tried to test the predictive power using the same data set without changing any parameters. It was found that the gradient model performed better than the decision tree, with a model score of more than 0.5.
 Finally, we try to use of random forests for modeling and forecasting, which is one of the most commonly used machine model, we by changing the number of random tree, to adjust the model prediction efficiency can get closer to 0.8 model score, the score has been very good, through the random forest we can rely on and properties of the film itself to forecast the film scores, And this has given us a very close approximation of the trend in the original data. 
 
-Model 3:
+### Model 3:
 Return on Investment is the one of the most significant index for filmmakers and investors. We plan to make a Decision Tree classification model to predict what kind of features have strong impact of getting high ROI level. Therefore, we create a new feature roi_level to indicates high positive ROI, low positive ROI and negative ROI. 
 In this model, we put features budget, language, country, and genres into the classification. For those categorical variables, we create dummy variables to make the model feasible to run. 
 Gini is used as the loss function in the decision tree to show the degree of chaos. To avoid overfitting, the maximum depth is set to 4. The decision tree's accuracy is calculated as 0.7153 by creating classifications for the test set. That means our model is perfect to use to classify the ROI level.
 
   
-Conclusion:
-Summary:
+## Conclusion:
+### Summary:
 In this project, we compared the films with different characteristics, such as the released month, the language of the movie, the genre and the budget. In the EDA, we can conclude that the more budget you invest, the more revenue you gonna get. In addition, Comedies, thrillers, fantasies, and romances, which are normally more popular, do not score so well, particularly horror films. Moreover, we discovered that both English and non-English films release in the second part of the year, with no significant defference in release time trends between the two. 
 After that, we got a general idea about what make a movie successful. Then focused on some key features, we built models to predict the popularity, the rating, and the revenue of a movie. The Random Forest model given us a very close approximation of the trend in the original data. The Gradient Boosting Regression is perfect to perform a reasonable solution to predict revenue. In terms of the Decision Tree model, the accuracy 0.71 indicates that we are confident to classify what kind of movie will get high ROI or negative ROI. 
-Recommendation:
+
+### Recommendation:
 Through the study of the movie data set, we predict some of the attributes of the movie through the characteristics of the movie itself, and at the same time deeply understand the trend of the movie in some aspect. Such as movie theaters in let's guidance in the movie of the year is usually concentrated in the second half of the year and the January of the next year because those time have more holiday time, and the quality of the film in this period is generally higher, we suggest that the viewing audience without clear goals, so in September, October, November, December and January are good viewing time. At the same time, although non-English films are not accepted by everyone, there are many excellent films worth enjoying.
 In terms of film types, many films that are not accepted by everyone, such as non-fiction films and musicals, can often produce good films that make a profound impact on people. We recommend audiences to try different types of films.
 Finally, it is possible to use the basic information of a movie to predict the success of a movie (including the movie's evaluation, score and income, etc.). This kind of prediction can give the audience some psychological expectations before releasing of movies and give the developer more opportunities to prepare and improve the movie, which is also a good application of data analysis.
  
-Reference:
+## Reference:
 [1] The Movies Dataset. (2017, November 10). [Dataset]. https://www.kaggle.com/rounakbanik/the-movies-dataset?select=movies_metadata.csv 
 [2] Kirenz, J. (2021, December 27). Lasso Regression with Python. Jan Kirenz. https://www.kirenz.com/post/2019-08-12-python-lasso-regression-auto/ 
 [3] Python Decision Tree Classification Tutorial: Scikit-Learn DecisionTreeClassifier. (n.d.). DataCamp Community. https://www.datacamp.com/community/tutorials/decision-tree-classification-python 
